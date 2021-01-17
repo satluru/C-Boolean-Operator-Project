@@ -1,0 +1,150 @@
+#include <iostream>
+#include <string>
+
+
+
+using namespace std;
+
+
+int AND(int a, int b)
+{
+	if (a == 1 && b == 1)
+		return 1;
+	else
+		return 0;
+}
+
+int OR(int a, int b)
+{
+	if (a == 1 || b == 1)
+		return 1;
+	else
+		return 0;
+}
+
+int N(int a)
+{
+	if (a == 1)
+		return 0;
+	else if(a == 0)
+		return 1;
+}
+
+int NAND(int a, int b)
+{
+	if (AND(a, b) == 1)
+		return 0;
+	else if (AND(a, b) == 0)
+		return 1;
+}
+
+int NOR(int a, int b)
+{
+	if (OR(a, b) == 1)
+		return 0;
+	else if (OR(a, b) == 0)
+		return 1;
+}
+
+int XOR(int a, int b)
+{
+	if (a == b)
+		return 0;
+	else 
+		return 1;
+}
+
+int XNOR(int a, int b)
+{
+	if (a == b)
+		return 1;
+	else
+		return 0;
+}
+
+int main()
+{
+
+	const int s = 8;
+
+	int arrayA[s] = { 1, 1, 1, 1, 0, 0, 0, 0 };
+	int arrayB[s] = { 1, 1, 0, 0, 1, 1, 0, 0 };
+	int arrayC[s] = { 1, 0, 1, 0, 1, 0, 1, 0 };
+
+	cout << "Problem 1: ";
+	cout << "\n===================\n";
+	cout << "A | B | C | A.B | C+A | B+C | (C+A).(B+C) | (A.B).((C+A).(B+C))'+(A.B)'.((C+A).(B+C)) | \n";
+
+
+	for (int i = 0; i < s; i++)
+	{
+		
+		
+			int a = arrayA[i];
+			int b = arrayB[i];
+			int c = arrayC[i];
+
+			cout << "\n" << a << " | " << b;
+			cout << " | " << c << " | ";
+			cout << AND(a, b) << " | ";
+			cout << OR(c, a) << " | ";
+			cout << OR(b, c) << " | ";
+			cout << AND(OR(c, a), OR(b, c)) << " | ";
+			cout << XOR(AND(a, b), AND(OR(c, a), OR(b, c)));
+		
+
+
+
+	}
+
+	cout << "\nProblem 2: ";
+	cout << "\n===================\n";
+	cout << "A | B | C | (A.B)' | C+A | (B+C)' | (C+A) + (B+C)' | ((A.B)')'.((C+A).(B+C))'.(A.B)'+((C+A)'.(B+C)') | \n";
+	
+	for (int i = 0; i < s; i++)
+	{
+
+
+		int a = arrayA[i];
+		int b = arrayB[i];
+		int c = arrayC[i];
+
+		cout << "\n" << a << " | " << b;
+		cout << " | " << c << " | ";
+		cout << NAND(a, b) << " | ";
+		cout << OR(c, a) << " | ";
+		cout << NOR(b, c) << " | ";
+		cout << XOR(OR(c, a), NOR(b, c)) << " | ";
+		cout << AND(NAND(a, b), XOR(OR(c, a), NOR(b, c)));
+
+
+
+
+	}
+
+	cout << "\nProblem 3: ";
+	cout << "\n===================\n";
+	cout << "A | B | C | (A+B) | (C+A)' | (B+C)' | (C+A) + (B+C)' | (A+B).((C+A)'.(B+C))'.(A.B)'.((C+A)'.(B+C)') | \n";
+
+	for (int i = 0; i < s; i++)
+	{
+
+
+		int a = arrayA[i];
+		int b = arrayB[i];
+		int c = arrayC[i];
+
+		cout << "\n" << a << " | " << b;
+		cout << " | " << c << " | ";
+		cout << OR(a, b) << " | ";
+		cout << NOR(c, a) << " | ";
+		cout << N(XOR(b, c)) << " | ";
+		cout << NAND(NOR(c, a), N(XOR(b, c))) << " | ";
+		cout << XNOR(OR(a, b), NAND(NOR(c, a), N(XOR(b, c))));
+
+
+
+
+	}
+	
+}
